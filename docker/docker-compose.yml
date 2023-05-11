@@ -1,0 +1,34 @@
+services:
+  # db:
+  #   build: ./pg_audit
+  #   # command: bash
+  #   tty: true
+  #   environment:
+  #     PATH: "/bin:/usr/bin:/usr/local/bin"
+  #   # ports:
+  #   #   - 2222:22
+  #     # - 8080:5432
+  # linux:
+  #   build: ./linux01
+  #   ports:
+  #     - "5432:5432"
+
+  pg01:
+    build: ./pgsql_11.15_01
+    ports:
+      - "5432:5432"
+
+  # pg02:
+  #   build: ./pgsql_11.15_02
+  #   ports:
+  #     - "5433:5432"
+
+  # pg03:
+  #   build: ./pgsql_11.15_logical
+  #   ports:
+  #     - "5434:5432"
+
+  # ansible:
+  #   build: ./ansible_docker
+  #   ports:
+  #     - "5000:22"
