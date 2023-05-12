@@ -2,16 +2,6 @@ from alpine
 
 run apk update
 
-# Python
-run apk add python3
-run apk add apk add py3-pip
-run apk add python3-dev
-run apk add linux-headers
-
-# Установка под postgres
-run su postgres -c "pip install psycopg[binary]>=3.0.0"
-run su postgres -c "pip install patroni[etcd3]"
-
 workdir /root
 
 run apk add gcc
@@ -34,6 +24,17 @@ run chown postgres /usr/local/pgsql/data
 run su postgres -c "/usr/local/pgsql/bin/initdb -D /usr/local/pgsql/data"
 run echo "listen_addresses = '0.0.0.0'" >> /usr/local/pgsql/data/postgresql.conf
 run echo "host    all             all             172.18.0.1/32            trust" >> /usr/local/pgsql/data/pg_hba.conf
+
+
+# Python
+run apk add python3
+run apk add py3-pip
+run apk add python3-dev
+run apk add linux-headers
+
+# Установка под postgres
+run su postgres -c "pip install psycopg[binary]"
+run su postgres -c "pip install patroni[etcd3]"
 
 cmd su postgres -c "/usr/local/pgsql/bin/postgres -D /usr/local/pgsql/data/"
 

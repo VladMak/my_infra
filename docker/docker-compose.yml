@@ -1,4 +1,15 @@
 services:
+  # Поднимаем хост с ансиблом, который будет цепляться к другим хостам
+  ansible_host:
+    build: ./ansible_host
+    ports:
+      - "5001:22"
+
+  # Тестовый стенд для ансибла
+  linux_host:
+    build: ./linux01
+    ports:
+      - "5002:22"
   # db:
   #   build: ./pg_audit
   #   # command: bash
@@ -13,10 +24,10 @@ services:
   #   ports:
   #     - "5432:5432"
 
-  pg01:
-    build: ./pgsql_11.15_01
-    ports:
-      - "5432:5432"
+  # pg01:
+  #   build: ./pgsql_11.15_01
+  #   ports:
+  #     - "5432:5432"
 
   # pg02:
   #   build: ./pgsql_11.15_02
